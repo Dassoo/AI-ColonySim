@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Colony Survival: When Agents Choose Between Cooperation and Self-Interest</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <article class="article">
+        <header class="article-header">
+            <h1 class="article-title">AI Colony Survival: When Agents Choose Between Cooperation and Self-Interest</h1>
+            <div class="article-meta">
+                <div class="author-info">
+                    <div class="author-details">
+                        <span class="author-name"><a href="https://fdassie.dev" target="_blank">Federico Dassiè</a></span>
+                        <span class="publish-date">August 2025</span>
+                    </div>
+                </div>
+                <div class="reading-time">10 min read</div>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">Reality shows often drop people into the wild to test their survival skills. While not always realistic, they reveal how humans may behave under pressure. But what if the same test were given to AI, forced to choose between cooperation and selfishness? I built a simulation to find out, and the results uncovered fascinating emergent behaviors that mirror real-world social dynamics.</p>
+
+            <h2>The Experiment</h2>
+            <p>I created a <a href="" target="_blank">turn-based colony survival simulation</a> where AI agents face a classic dilemma: cooperate for the greater good or act selfishly to ensure personal survival. Each agent receives the same simple, transparent prompt, giving them maximum freedom of thought within the limits of their available actions. The end-game is straightforward but challenging: either survive together or outlast everyone else.</p>
+
+            <p>This premise raises a few key questions:</p>
+
+            <ul>
+                <li>Under what conditions will players choose to cooperate?</li>
+                <li>Can selfish players survive on their own, or will they risk starving?</li>
+                <li>Is there a sustainable balance between cooperation and selfishness, and how can it be achieved?</li>
+            </ul>
+                
+            <p>The colony's fate depends on three critical resources:</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card population">
+                    <div class="stat-icon">
+                        <img src="img/blobs/pop-min.png" alt="Population" class="stat-image">
+                    </div>
+                    <h3>Population</h3>
+                    <p>The number of active players. Can grow through reproduction or shrink through natural death, starvation, or violence.</p>
+                </div>
+
+                <div class="stat-card food">
+                    <div class="stat-icon">
+                        <img src="img/blobs/food-min.png" alt="Food" class="stat-image">
+                    </div>
+                    <h3>Food</h3>
+                    <p>The colony’s lifeline. Drops by 1 per player each turn, and by an extra % if stockpiled beyond population needs. When it hits 0, starvation begins.</p>
+                </div>
+
+                <div class="stat-card knowledge">
+                    <div class="stat-icon">
+                        <img src="img/blobs/knowledge-min.png" alt="Knowledge" class="stat-image">
+                    </div>
+                    <h3>Knowledge</h3>
+                    <p>Collective intelligence that improves all actions. Decays by 10% each turn but makes everything more efficient.</p>
+                </div>
+            </div>
+            
+            <p>Players act indipendently and are not provided any pre-built personality, leading sometimes to sudden shifts in their behavior based on the circumstances.</p>
+            <p>Each player can choose from six actions every turn:</p>
+
+            <div class="actions-grid">
+                <div class="action-card cooperative">
+                    <div class="stat-icon">
+                        <img src="img/blobs/farmer-min.png" class="stat-image">
+                    </div>
+                    <h4>Gather Food</h4>
+                    <p>Add food to shared pool</p>
+                </div>
+
+                <div class="action-card cooperative">
+                    <div class="stat-icon">
+                        <img src="img/blobs/knowledge.png" class="stat-image">
+                    </div>
+                    <h4>Research</h4>
+                    <p>Boost collective intelligence</p>
+                </div>
+
+                <div class="action-card cooperative">
+                    <div class="stat-icon">
+                        <img src="img/blobs/pop-min.png" class="stat-image">
+                    </div>
+                    <h4>Reproduce</h4>
+                    <p>Create new players</p>
+                </div>
+
+                <div class="action-card selfish">
+                    <div class="stat-icon">
+                        <img src="img/blobs/thief-min.png" class="stat-image">
+                    </div>
+                    <h4>Steal Food</h4>
+                    <p>Take food + starvation immunity</p>
+                </div>
+
+                <div class="action-card aggressive">
+                    <div class="stat-icon">
+                        <img src="img/blobs/killer-min.png" class="stat-image">
+                    </div>
+                    <h4>Kill a Player</h4>
+                    <p>Eliminate competition</p>
+                </div>
+
+                <div class="action-card neutral">
+                    <div class="stat-icon">
+                        <img src="img/blobs/sleeping-min.png" class="stat-image">
+                    </div>
+                    <h4>Do Nothing</h4>
+                    <p>Skip turn lazily</p>
+                </div>
+            </div>
+
+            <p>The twist? Players who steal food gain one turn of immunity from starvation, creating a strong incentive for selfish behavior when resources are scarce. This mechanic makes food production during crises valuable yet risky, since the limited shared resources can be stolen at any moment, granting the thief temporary protection from starvation. Will this impact the level of trust between the player during hard times?</p>
+
+            <h2>Emergent Personalities</h2>
+            <p>As players act, they earn titles based on their behavior patterns, such as:</p>
+
+            <div class="personality-grid">
+                <div class="personality-card productive">
+                    <h3>The Productive</h3>
+                    <p><em>Forager → Provider → Master Gatherer → Harvest Lord</em></p>
+                    <p>These players focus on gathering food and supporting the colony.</p>
+                </div>
+
+                <div class="personality-card intellectual">
+                    <h3>The Intellectual</h3>
+                    <p><em>Apprentice → Scholar → The Wise → Sage</em></p>
+                    <p>Knowledge seekers who improve everyone's capabilities.</p>
+                </div>
+
+                <div class="personality-card antisocial">
+                    <h3>The Antisocial</h3>
+                    <p><em>Scavenger → Bandit → The Thief → Parasite</em></p>
+                    <p>Selfish players who steal from the colony for personal gain.</p>
+                </div>
+
+                <div class="personality-card aggressive">
+                    <h3>The Aggressive</h3>
+                    <p><em>Troublemaker → Assassin → Death Dealer → The Executioner</em></p>
+                    <p>Players who eliminate others to reduce competition.</p>
+                </div>
+            </div>
+
+            <p>These titles do not influence the game directly, but they help us track the average behavior of each player. This system will provide insight into what players tend to prioritize over the long run and the reasoning behind their future choices.</p>
+
+            <h2>The Knowledge Paradox</h2>
+            <p>One of the most interesting features is how knowledge affects all behaviors - including antisocial ones. Higher colony knowledge makes:</p>
+
+            <ul>
+                <li>Food gathering more efficient</li>
+                <li>Reproduction more successful</li>
+                <li><strong>Stealing more effective</strong></li>
+            </ul>
+
+            <p>This creates a paradox: researchers who help the colony also inadvertently make thieves more dangerous. Smart thieves can steal plenty of food in a single action, while novice thieves might only manage to barely get enough for themselves.</p>
+
+            <h2>Survival Strategies Emerge</h2>
+
+            <p>After running hundreds of simulations, clear survival strategies emerged:</p>
+
+            <blockquote>
+                "The most successful colonies maintained a clear and constant balance between food production and population growth. When this balance began to waver, chaos reigned."
+            </blockquote>
+
+            <div class="blobs-row">
+                <img src="img/blobs/row1-min.png">
+                <img src="img/blobs/row2-min.png">
+                <img src="img/blobs/row3-min.png">
+                <img src="img/blobs/row4-min.png">
+            </div>
+
+            <p>Pure cooperation was not always the best approach since unchecked growth inevitably triggered sudden food crises and steep declines. In normal circumstances, with little pressure thanks to abundant food production, players generally behaved lawfully. This stability allowed for steady food production and knowledge research, with modest room for growth. But when conditions deteriorated, panic spread quickly: players began prioritizing theft of the remaining food, turning on each other and even slacking. Some, with more philosophical temperaments, even continued researching through the worst times...</p>
+
+            <h2>Data Patterns and Analysis</h2>
+            <p>The simulation automatically tracks population, food, and knowledge levels across all turns, revealing distinct patterns that emerge across different colony outcomes. After analyzing hundreds of simulation runs, several key behavioral patterns become apparent.</p>
+
+            <div class="plot-container">
+                <img src="img/temp/game_stats_turn_20.png" class="plot-image">
+                <p class="plot-caption">A typical simulation showing the delicate balance between growth and resource management. Notice how consistently players struggle to recover after a food crisis.</p>
+            </div>
+
+            <p>Three distinct colony trajectories consistently emerge from the data:</p>
+
+            <div class="trajectory-grid">
+                <div class="trajectory-card stable">
+                    <img src="img/blobs/hug.png" class="trajectory-icon">
+                    <div class="trajectory-content">
+                        <div class="trajectory-header">
+                            <h3>Stable Colonies</h3>
+                            <span class="rarity-tag rare">RARE</span>
+                        </div>
+                        <p>Maintain steady food production that matches population growth. Knowledge grows consistently, creating a virtuous cycle of improved efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="trajectory-card boom-bust">
+                    <img src="img/blobs/volatile.png" class="trajectory-icon">
+                    <div class="trajectory-content">
+                        <div class="trajectory-header">
+                            <h3>Boom-Bust Cycles</h3>
+                            <span class="rarity-tag common">COMMON</span>
+                        </div>
+                        <p>Experience rapid growth followed by a sharp decline when population size exceeds the available food resources. Highly volatile.</p>
+                    </div>
+                </div>
+
+                <div class="trajectory-card collapse">
+                    <img src="img/blobs/fire.png" class="trajectory-icon">
+                    <div class="trajectory-content">
+                        <div class="trajectory-header">
+                            <h3>Early Collapse</h3>
+                            <span class="rarity-tag uncommon">UNCOMMON</span>
+                        </div>
+                        <p>Fail to establish sustainable resource production. Often triggered by early aggression or poor resource management decisions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>The data reveals several critical thresholds that determine colony survival:</p>
+
+            <ul>
+                <li><strong>Food-to-Population Ratio</strong>: Colonies with food reserves below 1.5x their population size enter crisis mode within 2-3 turns</li>
+                <li><strong>Population Density</strong>: Colonies growing too quickly without proportional food production face inevitable collapse</li>
+                <li><strong>Theft Cascade</strong>: Once 30% or more players engage in stealing, cooperative behavior rapidly deteriorates</li>
+            </ul>
+
+            <p>Player behavior follows predictable patterns based on resource availability:</p>
+
+            <blockquote>
+                "During abundance (food > 2x population), 85% of actions are cooperative. During scarcity (food < 0.5x population), the cooperation rate sharply drops, with theft and aggression often dominating decision-making."
+            </blockquote>
+
+            <h3>Survival Predictors</h3>
+            <p>Statistical analysis reveals the strongest predictors of long-term colony success:</p>
+
+            <ol>
+                <li><strong>Early knowledge investment</strong> (turns 1-5): Colonies that gets some research early survive longer</li>
+                <li><strong>Controlled growth</strong>: Successful colonies maintain population growth under 20% per turn</li>
+                <li><strong>Resource buffer maintenance</strong>: Keeping food reserves above 150% of population needs prevents crisis cascades</li>
+                <li><strong>Behavioral diversity</strong>: Colonies with 2-3 distinct player archetypes (productive, intellectual, neutral) outperform homogeneous groups</li>
+            </ol>
+
+            <div class="plot-container">
+                <img src="img/temp/game_stats_turn_36.png" class="plot-image">
+                <p class="plot-caption">During times of crisis, players may attempt recovery efforts, an important sign that mutual trust between them still persists.</p>
+            </div>
+
+            <div class="plot-container">
+                <img src="img/temp/game_stats_turn_11.png" class="plot-image">
+                <p class="plot-caption">Sometimes... they will just not (early collapse).</p>
+            </div>
+
+            <h2>Real-World Parallels</h2>
+            <p>The behaviors observed in this simulation mirror patterns we see throughout human history and modern society. During economic downturns, we often witness a shift from cooperative behavior to more self-interested actions; people hoard resources, cut social programs, and prioritize immediate survival over long-term community health.</p>
+
+            <p>Consider how knowledge works in our world: education and technology make both altruistic and selfish behaviors more effective. A well-educated society produces better doctors and teachers, but also more sophisticated financial fraudsters and cyber criminals. The same tools that enable global cooperation also enable more efficient exploitation.</p>
+
+            <blockquote>
+                "Just as in the simulation, real societies must balance individual freedom with collective welfare, knowing that both cooperation and competition serve essential roles in survival and progress."
+            </blockquote>
+
+            <p>The emergence of distinct personality types in the simulation reflects how specialization naturally develops in human communities. We see "productive" types (farmers, builders), "intellectual" types (researchers, educators), and yes, even "antisocial" types who exploit systems for personal gain. The key insight is that diversity of strategies, while sometimes creating tension, often makes communities more resilient to unexpected challenges.</p>
+
+            <h2>The Technical Implementation</h2>
+            <p>The simulation runs on a Python-based framework where GPT-4 agents make independent decisions each turn. Players act sequentially in a synchronous turn-based loop rather than simultaneously. This design choice ensures proper game state management: if agents acted concurrently, they would receive identical game states and create logical conflicts (imagine one agent killing another who hasn't yet taken their turn). Sequential processing guarantees that each agent sees the current, accurate state of the world when making decisions, which are consequently impacted by how other agents behave. The architecture emphasizes emergent behavior over scripted responses:</p>
+
+            <div class="code-block">
+                <pre><code>for i in range(turns):
+    # Cycling models during the turn
+    for model in game_state.models.copy():
+        game_state.current_agent = model.name
+        choice_message = choices(agent_name=model.name, game_state=game_state)
+        response = model.run(choice_message)
+    
+    # Natural deaths and resource decay
+    game_state.natural_death()
+    game_state.food, game_state.knowledge = game_state.resources_decay()</code></pre>
+            </div>
+
+            <p>After all agents complete their turns, several automatic processes occur: natural deaths reduce population, food consumption equals the current population size, excess food beyond population needs decays by a percentage, and knowledge diminishes by 10%. When food reserves hit zero, starvation strikes randomly, potentially eliminating up to half the remaining population.</p>
+
+            <p>Each agent maintains its own decision-making process without predetermined personality traits. Instead, personalities emerge from accumulated actions:</p>
+
+            <div class="code-block">
+                <pre><code>def get_title_based_on_actions(self) -> str:
+    total_actions = sum(self.action_counts.values())
+    
+    # Check for extreme negative behaviors first
+    if kill_actions >= 2:
+        level = min(kill_actions - 1, 3)
+        return TITLES["killer"][level]  # "Assassin" → "The Executioner"
+    
+    # Check for significant stealing behavior
+    if steal_pct >= 0.3 or steal_actions >= 3:
+        level = min(steal_actions // 2, 3)
+        return TITLES["thief"][level]  # "Bandit" → "Parasite"
+    
+    # Positive specializations
+    if food_pct >= 0.4:
+        level = min(food_actions // 4, 3)
+        return TITLES["food_gatherer"][level]  # "Provider" → "Harvest Lord"</code></pre>
+            </div>
+
+            <p>Knowledge acts as a colony-wide efficiency multiplier that affects all actions. Every 10 points of knowledge provides bonuses: food gathering becomes more reliable (reducing failure rates from 10% to 8%), reproduction can yield up to 4 agents instead of the base 1-2, and stealing becomes devastatingly effective: master thieves with high knowledge can steal 5-7 food in a single action compared to novice thieves who barely manage 1-2. This creates the mentioned knowledge paradox where research benefits everyone, including those who exploit the colony.</p>
+
+            <div class="code-block">
+                <pre><code>@tool
+def steal_food(agent: Agent) -> str:
+    knowledge_bonus = game_state.knowledge // 10
+    
+    # Knowledge improves stealing success - smarter thieves steal more efficiently
+    fail_chance = max(0.05, 0.15 - knowledge_bonus * 0.01)
+    poor_chance = max(0.25, 0.4 - knowledge_bonus * 0.03)
+    good_chance = min(0.75, 0.6 + knowledge_bonus * 0.025)
+    
+    if rand < fail_chance:
+        stolen_food = 1  # Only got a little
+    elif rand < good_chance:
+        stolen_food = 3  # Good theft
+    else:
+        stolen_food = 5 + min(knowledge_bonus // 2, 2)  # Master thief</code></pre>
+            </div>
+
+            <h2>Lessons for AI Development</h2>
+            <p>This simulation offers valuable insights for designing AI systems that must balance competing objectives:</p>
+
+            <ol>
+                <li><strong>Moral flexibility is crucial</strong> - Rigid ethical programming may fail in crisis situations where survival requires difficult choices</li>
+                <li><strong>Intelligence amplifies everything</strong> - More capable AI systems will be better at both helping and harming, requiring careful consideration of safeguards</li>
+                <li><strong>Emergent behavior beats scripted responses</strong> - Allowing AI to develop strategies organically often produces more robust and adaptable systems</li>
+                <li><strong>Context shapes morality</strong> - The same action can be beneficial or harmful depending on circumstances, suggesting AI ethics must be contextual rather than absolute</li>
+            </ol>
+
+            <p>As we build AI systems that will interact with human society, understanding these dynamics becomes essential. The challenge isn't creating perfectly moral AI, but designing systems that can navigate the complex trade-offs between individual and collective interests that define real-world decision-making.</p>
+
+            <div class="blobs-row">
+                <img src="img/blobs/conc1-min.png">
+                <img src="img/blobs/conc2-min.png">
+                <img src="img/blobs/conc3-min.png">
+            </div>
+
+            <blockquote style="margin: -10px;">
+                <p>The colony simulation reveals that survival isn't just about being good, it's about being adaptable, strategic, and capable of making difficult choices when circumstances demand it. As we shape the future of AI, these lessons remind us that the most robust systems may be those that embrace, rather than eliminate, the complexity of moral decision-making.</p>
+            </blockquote>
+        </div>
+
+        <footer class="article-footer">
+            <div class="tags">
+                <span class="tag">AI Simulation</span>
+                <span class="tag">Game Theory</span>
+                <span class="tag">Emergent Behavior</span>
+                <span class="tag">Social Dynamics</span>
+            </div>
+        </footer>
+    </article>
+</body>
+</html>
